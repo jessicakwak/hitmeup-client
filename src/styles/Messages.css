@@ -1,0 +1,68 @@
+#messages {
+  overflow-y: auto;
+}
+
+#messages #content {
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.message {
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 2% 4% 5% 1%;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  line-height: 1.5;
+  position: relative;
+}
+
+.message .user {
+}
+
+.message .author {
+  font-weight: 700;
+}
+
+.message .date {
+  color: #333;
+  font-size: 12px;
+  float: right;
+  margin-bottom: 5%;
+}
+
+.message .body {
+  margin: 3% 0 5% 10%;
+  color: #4d4c7d;
+  font-size: 0.9rem;
+}
+
+.userImageMessage {
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 2%;
+}
+
+.usrInfo {
+  margin-left: 10%;
+}
+
+.user,
+.location,
+.eventDate {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.location {
+  color: tomato;
+}
+
+.summaryText {
+  color: grey;
+}

@@ -1,0 +1,90 @@
+/* #new-message {
+  border-top: 1px solid #ddd;
+  background: #f3f3f3;
+  color: white;
+  text-align: center;
+  width: 80vw;
+  height: 500px;
+} */
+
+/*
+
+#new-message form {
+  display: grid;
+  grid-template-rows: 1fr 0.5fr 1fr;
+  justify-content: center;
+}
+#new-message form input[type="date"] {
+  margin-top: 0.8%;
+  width: 20vw;
+  height: 35px;
+  font-family: "Lato";
+  font-size: 1rem;
+  border-radius: 3px;
+  border: 1px solid grey;
+  margin-right: 3%;
+  padding-left: 2%;
+}
+#new-message input[type="number"] {
+  border: 1px solid grey;
+  width: 35px;
+  border-radius: 3px;
+  margin-right: 1%;
+  margin-left: 1%;
+  padding: 9px;
+  font-size: 1rem;
+}
+
+select {
+  height: 4vh;
+  background-color: #827397;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  margin-right: 2vw;
+}
+
+#new-message input[type="text"] {
+  border: 1px solid grey;
+  width: 18vw;
+  height: 36px;
+  margin-left: 1vw;
+}
+
+#new-message form .textContent {
+  padding: 0 5% 0 1.5%;
+}
+#new-message form label {
+  display: block;
+  color: white;
+  font-weight: bold;
+}
+
+#new-message form textarea {
+  width: 70vw;
+  height: 48px;
+  font-size: 1rem;
+  padding: 1% 1% 0 1%;
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-top: 1%;
+}
+
+.dateTimePlace {
+  font-size: 0.8rem;
+  padding-top: 2vh;
+  padding-left: 0.8vw;
+}
+
+.submitButton{
+  padding-top:0.5%
+}
+
+.submitButton button[type="submit"] {
+  border-radius: 3px;
+  width: 200px;
+  height: 60%;
+  float: right;
+  background-color: #1f1c3a;
+} */

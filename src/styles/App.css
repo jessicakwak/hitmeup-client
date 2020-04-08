@@ -1,0 +1,135 @@
+/* Global */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Lato, sans-serif;
+  background: #f8f8f8;
+  overflow: hidden;
+}
+
+.error {
+  color: tomato;
+  margin-bottom: 10px;
+}
+
+/* Forms */
+
+input[type="text"],
+input[type="password"] {
+  font-size: 16px;
+  height: 40px;
+  border: 1px solid #ced4da;
+  padding: 11px;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button.positive {
+  display: block;
+  background: #424242;
+  border-color: #424242;
+  color: white;
+  font-size: 16px;
+  border-radius: 3px;
+}
+
+button.positive:hover {
+  background: #636363;
+  border-color: #636363;
+}
+
+button {
+  cursor: pointer;
+}
+
+input[type="text"],
+input[type="password"],
+button {
+  outline: none;
+}
+
+.link {
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.link a {
+  color: #1264a3;
+}
+
+form .error {
+  display: block;
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 10px;
+}
+
+/* Cards */
+
+.card {
+  background: white;
+  max-width: 350px;
+  min-width: 260px;
+  padding: 20px 20px 8px 20px;
+  box-sizing: border-box;
+  margin: 0 auto 0 auto;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.card input[type="text"],
+.card input[type="password"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 2vh;
+}
+.card input[type="file"] {
+  display: inline-block;
+  float: right;
+  width: 160px;
+  margin-bottom: 2vh;
+}
+
+.card button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+}
+
+.card label {
+  float: right;
+  font-size: 0.8rem;
+  margin-top: 0;
+}
+
+.loginContainer {
+  text-align: center;
+  padding-top: 10vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
+  font-family: "Nunito";
+  font-weight: 200;
+  font-size: 1rem;
+}
+
+.loginContainer h4 {
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+.logo {
+  width: 30vw;
+  min-width: 260px;
+}
+
+@media (max-height: 600px) {
+  .loginContainer {
+    padding-top: 2vh;
+  }
+}
