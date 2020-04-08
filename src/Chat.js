@@ -4,12 +4,14 @@ import "./styles/Chat.css";
 import Sidebar from "./Sidebar";
 import Messages from "./Messages";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 
 class Chat extends Component {
   state = {
     channels: [],
     selected: "",
-    wHeight: 0
+    wHeight: 0,
+    nHeight: 0
   };
   componentWillMount() {
     //Header includes a token
@@ -24,6 +26,7 @@ class Chat extends Component {
         res.data[0].active = true;
         //then save to the state variables
         this.setState({ channels: res.data, selected: res.data[0]._id });
+        localStorage.setItem("channel", res.data[0]._id);
       })
       .catch(err => console.log(err));
     this.updateDimensions();
@@ -45,32 +48,45 @@ class Chat extends Component {
   };
 
   updateDimensions = () => {
-    this.setState({
-      wHeight: window.innerHeight
-    });
+    if (window.innerWidth >= 600) {
+      this.setState({
+        wHeight: window.innerHeight,
+        nHeight: window.innerHeight
+      });
+    } else {
+      this.setState({
+        wHeight: window.innerHeight - 200,
+        nHeight: 200
+      });
+    }
   };
+
   // Render
   render() {
     return (
       <div id="wrap">
-        <Grid container>
-          <Grid item xs={12} sm={3} md={3}>
-            <div style={{ height: `${this.wHeight}px` }}>
-              <Sidebar
-                redirect={this.redirect}
-                changeChannel={this.changeChannel}
-                channels={this.state.channels}
-              />
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={9} md={9}>
-            <div
-              style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
-              id="test"
-            >
-              <Messages selected={this.state.selected} />
-            </div>
-          </Grid>
+        <Grid container justify="center" alignItems="center">
+          <Box clone order={{ xs: 2, sm: 1 }}>
+            <Grid item xs={12} sm={3} md={3}>
+              <div style={{ height: `${this.state.nHeight}px` }} id="nav">
+                <Sidebar
+                  redirect={this.redirect}
+                  changeChannel={this.changeChannel}
+                  channels={this.state.channels}
+                />
+              </div>
+            </Grid>
+          </Box>
+          <Box clone order={{ xs: 1, sm: 2 }}>
+            <Grid item xs={12} sm={9} md={9}>
+              <div
+                style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
+                id="test"
+              >
+                <Messages selected={this.state.selected} />
+              </div>
+            </Grid>
+          </Box>
         </Grid>
       </div>
     );

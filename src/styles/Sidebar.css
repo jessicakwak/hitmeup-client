@@ -1,5 +1,5 @@
 #sidebar {
-  height: 100vh;
+  height: 100%;
   background: #1f1c3a;
   color: #c2b7c5;
   padding: 20px;
@@ -139,4 +139,31 @@
 
 #card i {
   float: right;
+}
+
+@media (max-width: 600px) {
+  #sidebar {
+    padding: 2%;
+  }
+  .userImage {
+    height: 15vw;
+    width: 15vw;
+  }
+
+  #userEmail {
+    display: none;
+  }
+  .list-unstyled {
+  }
+  #meetup {
+    margin-top: 60%;
+  }
+  p {
+    margin-bottom: 0;
+  }
+
+  .list-unstyled {
+    text-align: left;
+    font-size: 0.8rem;
+  }
 }

@@ -1,6 +1,5 @@
-/* #wrap {
+#wrap {
   height: 100vh;
-  display: grid;
-  grid-template-columns: 20vw 80vw;
   overflow: hidden;
-} */
+  position: relative;
+}
