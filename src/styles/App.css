@@ -108,6 +108,10 @@ form .error {
   margin-top: 0;
 }
 
+#profileImage {
+  float: left;
+}
+
 .loginContainer {
   text-align: center;
   padding-top: 10vh;
