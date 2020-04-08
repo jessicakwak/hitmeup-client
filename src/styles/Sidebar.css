@@ -47,7 +47,7 @@
   margin-right: 3%;
 }
 #sidebar button {
-  width: 100%;
+  /* width: 100%; */
   font-size: 14px;
   padding: 10px;
   box-sizing: border-box;
@@ -62,6 +62,7 @@
 #meetup {
   background: #d8b9c3;
   color: #1f1c3a;
+  width: 100%;
 }
 
 #meetup:hover {
@@ -109,7 +110,7 @@
 
 #wall {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background: rgba(0, 0, 0, 0.7);
   position: absolute;
   top: 0;
@@ -142,6 +143,12 @@
 }
 
 @media (max-width: 600px) {
+  #wall {
+    top: -75vh;
+    height: 100vh;
+    /* background: rgba(255, 255, 255, 0.7); */
+    background: none;
+  }
   #sidebar {
     padding: 5% 5% 5% 2%;
   }
@@ -157,7 +164,12 @@
   .list-unstyled {
   }
   #meetup {
-    display: none;
+    position: absolute;
+    top: -50px;
+    left: 74vw;
+    z-index: 100;
+    width: 20%;
+    height: 40px;
   }
   .userInfo p {
     display: none;
