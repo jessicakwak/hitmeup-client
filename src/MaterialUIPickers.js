@@ -10,9 +10,6 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import moment from "moment";
-import Moment from "react-moment";
-import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -43,50 +40,10 @@ export default function MaterialUIPickers(props) {
   // The first commit of Material-UI
   const [selectedDate, setSelectedDate] = React.useState(new Date());
 
-  const newMessage = {
-    text: "",
-    location: "",
-    eventDate: selectedDate
-  };
-
-  const changeText = e => {
-    newMessage.text = e.target.value;
-  };
-  const changeLoc = e => {
-    newMessage.location = e.target.value;
-  };
-
   const handleDateChange = date => {
     setSelectedDate(date);
+    props.changeDate(date);
     // console.log(newMessage);
-  };
-
-  const createMessage = e => {
-    e.preventDefault();
-    let dataToSend = {
-      user: {
-        _id: "",
-        name: localStorage.getItem("name"),
-        email: localStorage.getItem("email")
-      },
-      text: newMessage.text,
-      channel: localStorage.getItem("channel"),
-      location: newMessage.location,
-      date: newMessage.eventDate
-    };
-    let config = {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
-    };
-    axios
-      .post(`${process.env.REACT_APP_API}/messages`, dataToSend, config)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-    props.closeWall();
-    // document.getElementById("wall").classList.remove("open");
   };
 
   return (
@@ -127,7 +84,7 @@ export default function MaterialUIPickers(props) {
               defaultValue=""
               placeholder="Where should we meet?"
               variant="outlined"
-              onChange={changeLoc}
+              onChange={props.changeLoc}
             />
           </form>
         </Grid>
@@ -141,12 +98,12 @@ export default function MaterialUIPickers(props) {
               defaultValue=""
               placeholder="Enter any other meetup details!"
               variant="outlined"
-              onChange={changeText}
+              onChange={props.changeText}
             />
           </form>
         </Grid>
         <Grid item xs={12} md={12} lg={12}>
-          <Button variant="contained" onClick={createMessage}>
+          <Button variant="contained" onClick={props.createMessage}>
             Hit Me Up
           </Button>
         </Grid>

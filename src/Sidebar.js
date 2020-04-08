@@ -3,8 +3,6 @@ import axios from "axios";
 import "./styles/Sidebar.css";
 import MaterialUIPickers from "./MaterialUIPickers";
 import Grid from "@material-ui/core/Grid";
-import moment from "moment";
-import Moment from "react-moment";
 
 class Sidebar extends Component {
   // Data
@@ -19,11 +17,8 @@ class Sidebar extends Component {
     wallOpen: false,
     newMessage: {
       text: "",
-      eventDate: moment().format("YYYY-MM-DD"),
-      inDateFormat: Date.now(),
-      // eventTime: ''
-      location: "default",
-      time: ""
+      location: "",
+      eventDate: Date.now()
     }
   };
   // Lifecycle
@@ -41,6 +36,25 @@ class Sidebar extends Component {
     //when sidebar receives a new prop (from [] to something) set state variables
     this.setState({ channels: newProp.channels });
   }
+
+  changeText = e => {
+    let copy = this.state.newMessage;
+    copy.text = e.target.value;
+    this.setState({ newMessage: copy });
+  };
+
+  changeDate = input => {
+    let copy = this.state.newMessage;
+    copy.eventDate = input;
+    this.setState({ newMessage: copy });
+  };
+
+  changeLoc = e => {
+    let copy = this.state.newMessage;
+    copy.location = e.target.value;
+    this.setState({ newMessage: copy });
+  };
+
   createMessage = e => {
     e.preventDefault();
     let dataToSend = {
@@ -50,28 +64,27 @@ class Sidebar extends Component {
         email: localStorage.getItem("email")
       },
       text: this.state.newMessage.text,
-      channel: this.state.selected,
+      channel: localStorage.getItem("channel"),
       location: this.state.newMessage.location,
-      date: this.state.newMessage.inDateFormat
+      date: this.state.newMessage.eventDate
     };
-
+    console.log(dataToSend);
     let config = {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     };
     axios
       .post(`${process.env.REACT_APP_API}/messages`, dataToSend, config)
       .then(response => {
-        let msgCopy = this.state.messages;
-        msgCopy.unshift(response.data);
-        this.setState({ messages: msgCopy });
-        this.forceUpdate();
+        console.log(response);
+        if (response) {
+          this.closeWall();
+        }
       })
       .catch(err => {
         console.log(err);
       });
-    let clearedMsg = this.state.newMessage;
-    clearedMsg.text = "";
-    this.setState({ newMessage: clearedMsg });
+
+    // document.getElementById("wall").classList.remove("open");
   };
 
   // Methods
@@ -88,12 +101,17 @@ class Sidebar extends Component {
     this.setState({
       wallOpen: true
     });
+    this.props.wallOpen();
   };
   closeWall = () => {
-    this.setState({
-      wallOpen: false
-    });
-    window.location.reload(false);
+    this.setState(
+      {
+        wallOpen: false
+      },
+      () => {
+        this.props.wallClose();
+      }
+    );
   };
   // Render
   render() {
@@ -120,12 +138,12 @@ class Sidebar extends Component {
               <p id="userEmail">{this.state.currentUser.email}</p>
             </div>
           </Grid>
-          <Grid item xs={3} sm={12} md={12}>
+          <Grid item sm={12} md={12}>
             <button onClick={this.openWall} id="meetup">
               <span>HITMEUP</span>
             </button>
           </Grid>
-          <Grid item xs={4} sm={12} md={12}>
+          <Grid item xs={6} sm={12} md={12}>
             <ul className="list-unstyled">
               {this.state.channels.map((channel, i) => {
                 return (
@@ -141,7 +159,7 @@ class Sidebar extends Component {
               })}
             </ul>
           </Grid>
-          <Grid item xs={2} sm={12} md={12}>
+          <Grid item xs={3} sm={12} md={12}>
             <button onClick={this.logout} id="logoutBtn">
               Logout
             </button>
@@ -155,7 +173,13 @@ class Sidebar extends Component {
               onClick={() => this.closeWall()}
             ></i>
             <h4>What are the details?</h4>
-            <MaterialUIPickers closeWall={this.closeWall} />
+            <MaterialUIPickers
+              closeWall={this.closeWall}
+              changeText={this.changeText}
+              changeDate={this.changeDate}
+              changeLoc={this.changeLoc}
+              createMessage={this.createMessage}
+            />
           </div>
         </div>
       </div>

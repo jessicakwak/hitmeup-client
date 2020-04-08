@@ -143,11 +143,12 @@
 
 @media (max-width: 600px) {
   #sidebar {
-    padding: 2%;
+    padding: 5% 5% 5% 2%;
   }
   .userImage {
-    height: 15vw;
-    width: 15vw;
+    height: 12vw;
+    width: 12vw;
+    margin-bottom: 10%;
   }
 
   #userEmail {
@@ -156,10 +157,10 @@
   .list-unstyled {
   }
   #meetup {
-    margin-top: 60%;
+    display: none;
   }
-  p {
-    margin-bottom: 0;
+  .userInfo p {
+    display: none;
   }
 
   .list-unstyled {

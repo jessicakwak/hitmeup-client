@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import "./styles/Messages.css";
 import "./styles/NewMessage.css";
 import axios from "axios";
-import moment from "moment";
 import Moment from "react-moment";
-
-import MaterialUIPickers from "./MaterialUIPickers";
 
 class Messages extends Component {
   // Data
   state = {
     messages: [],
-    selected: this.props.selected
+    selected: this.props.selected,
+    wallOpen: false
   };
   componentDidMount() {
     // this.scroll()
@@ -21,7 +19,8 @@ class Messages extends Component {
     //when the props inherited from Chat changed from [] to something
     this.setState(
       {
-        selected: newProps.selected
+        selected: newProps.selected,
+        wallOpen: newProps.wallOpen
       }, //async function, so do stuffs after this happened
       () => {
         let config = {

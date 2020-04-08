@@ -11,7 +11,8 @@ class Chat extends Component {
     channels: [],
     selected: "",
     wHeight: 0,
-    nHeight: 0
+    nHeight: 0,
+    wallOpen: false
   };
   componentWillMount() {
     //Header includes a token
@@ -61,6 +62,13 @@ class Chat extends Component {
     }
   };
 
+  wallOpen = () => {
+    this.setState({ wallOpen: true });
+  };
+
+  wallClose = () => {
+    this.setState({ wallOpen: false });
+  };
   // Render
   render() {
     return (
@@ -73,6 +81,8 @@ class Chat extends Component {
                   redirect={this.redirect}
                   changeChannel={this.changeChannel}
                   channels={this.state.channels}
+                  wallOpen={this.wallOpen}
+                  wallClose={this.wallClose}
                 />
               </div>
             </Grid>
@@ -83,7 +93,10 @@ class Chat extends Component {
                 style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
                 id="test"
               >
-                <Messages selected={this.state.selected} />
+                <Messages
+                  selected={this.state.selected}
+                  wallOpen={this.state.wallOpen}
+                />
               </div>
             </Grid>
           </Box>
