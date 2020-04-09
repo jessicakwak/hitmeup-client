@@ -15,7 +15,7 @@ class Chat extends Component {
     wHeight: 0,
     nHeight: 0
   };
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     //Header includes a token
     let config = {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -35,6 +35,21 @@ class Chat extends Component {
     //this is where you need to set selected channel because channel ID is empty
   }
   componentDidMount() {
+    let config = {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    };
+    //make a get request via axios to get channel list
+    axios
+      .get(`${process.env.REACT_APP_API}/channels`, config)
+      .then(res => {
+        //set active state to true for the first channel
+        res.data[0].active = true;
+        //then save to the state variables
+        this.setState({ channels: res.data, selected: res.data[0]._id });
+        localStorage.setItem("channel", res.data[0]._id);
+      })
+      .catch(err => console.log(err));
+    this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions);
   }
 
@@ -57,8 +72,8 @@ class Chat extends Component {
       });
     } else {
       this.setState({
-        wHeight: window.innerHeight,
-        nHeight: window.innerHeight
+        wHeight: window.innerHeight - 100,
+        nHeight: 100
       });
     }
   };
@@ -68,8 +83,8 @@ class Chat extends Component {
     return (
       <div id="wrap">
         <Grid container justify="center" alignItems="center">
-          <Box clone order={{ xs: 1, sm: 1 }}>
-            <Grid item xs={3} sm={3} md={3}>
+          <Box clone order={{ xs: 2, sm: 1 }}>
+            <Grid item xs={12} sm={3} md={3}>
               <div style={{ height: `${this.state.nHeight}px` }} id="nav">
                 <Sidebar
                   redirect={this.redirect}
@@ -79,8 +94,8 @@ class Chat extends Component {
               </div>
             </Grid>
           </Box>
-          <Box clone order={{ xs: 2, sm: 2 }}>
-            <Grid item xs={9} sm={9} md={9}>
+          <Box clone order={{ xs: 1, sm: 2 }}>
+            <Grid item xs={12} sm={9} md={9}>
               <div
                 style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
                 id="test"
