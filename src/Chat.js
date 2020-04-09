@@ -95,10 +95,7 @@ class Chat extends Component {
                 style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
                 id="test"
               >
-                <Messages
-                  selected={this.state.selected}
-                  wallOpen={this.state.wallOpen}
-                />
+                <Messages selected={this.state.selected} />
               </div>
             </Grid>
           </Box>
