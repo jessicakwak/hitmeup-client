@@ -112,7 +112,7 @@ class Sidebar extends Component {
     return (
       <div id="sidebar">
         <Grid container>
-          <Grid item xs={3} sm={12} md={12}>
+          <Grid item xs={4} sm={12} md={12}>
             <img
               src="https://res.cloudinary.com/jesskcloud/image/upload/v1586161244/hitmeup_logo_trans_axrm3h.png"
               className="Sidebarlogo"
@@ -135,7 +135,7 @@ class Sidebar extends Component {
               </button>
             </div>
           </Grid>
-          <Grid item xs={6} sm={12} md={12}>
+          <Grid item xs={5} sm={12} md={12}>
             <ul className="list-unstyled">
               {this.state.channels.map((channel, i) => {
                 return (
