@@ -13,8 +13,7 @@ class Chat extends Component {
     channels: [],
     selected: "",
     wHeight: 0,
-    nHeight: 0,
-    wallOpen: false
+    nHeight: 0
   };
   componentWillMount() {
     //Header includes a token
@@ -58,26 +57,30 @@ class Chat extends Component {
       });
     } else {
       this.setState({
-        wHeight: window.innerHeight,
-        nHeight: 0
+        wHeight: window.innerHeight - 100,
+        nHeight: 100
       });
     }
   };
 
-  wallOpen = () => {
-    this.setState({ wallOpen: true });
-  };
-
-  wallClose = () => {
-    this.setState({ wallOpen: false });
-  };
   // Render
   render() {
     return (
       <div id="wrap">
         <Grid container justify="center" alignItems="center">
+          <Box clone order={{ xs: 2, sm: 1 }}>
+            <Grid item xs={12} sm={3} md={3}>
+              <div style={{ height: `${this.state.nHeight}px` }} id="nav">
+                <Sidebar
+                  redirect={this.redirect}
+                  changeChannel={this.changeChannel}
+                  channels={this.state.channels}
+                />
+              </div>
+            </Grid>
+          </Box>
           <Box clone order={{ xs: 1, sm: 2 }}>
-            <Grid item xs={12} sm={12} md={12}>
+            <Grid item xs={12} sm={9} md={9}>
               <div
                 style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
                 id="test"

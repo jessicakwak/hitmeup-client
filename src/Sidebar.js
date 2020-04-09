@@ -101,17 +101,11 @@ class Sidebar extends Component {
     this.setState({
       wallOpen: true
     });
-    this.props.wallOpen();
   };
   closeWall = () => {
-    this.setState(
-      {
-        wallOpen: false
-      },
-      () => {
-        this.props.wallClose();
-      }
-    );
+    this.setState({
+      wallOpen: false
+    });
   };
   // Render
   render() {
