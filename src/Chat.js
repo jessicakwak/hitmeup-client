@@ -58,8 +58,8 @@ class Chat extends Component {
       });
     } else {
       this.setState({
-        wHeight: window.innerHeight - 200,
-        nHeight: 200
+        wHeight: window.innerHeight,
+        nHeight: 0
       });
     }
   };
