@@ -12,7 +12,27 @@ class Messages extends Component {
     wallOpen: false
   };
   componentDidMount() {
-    // this.scroll()
+    this.setState(
+      {
+        selected: this.props.selected,
+        wallOpen: this.props.wallOpen
+      }, //async function, so do stuffs after this happened
+      () => {
+        let config = {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+        };
+        axios
+          .get(
+            `${process.env.REACT_APP_API}/messages?channel=${this.state.selected}`,
+            config
+          )
+          .then(res => {
+            res.data.reverse();
+            this.setState({ messages: res.data });
+          })
+          .catch(err => console.log(err));
+      }
+    );
   }
   // Lifecycle
   componentWillReceiveProps(newProps) {
