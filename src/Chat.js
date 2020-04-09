@@ -6,6 +6,8 @@ import Messages from "./Messages";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 
+//current working v
+
 class Chat extends Component {
   state = {
     channels: [],
