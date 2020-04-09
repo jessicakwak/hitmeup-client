@@ -30,7 +30,9 @@ class Signup extends React.Component {
     }
 
     let formData = new FormData();
-    formData.append("image", this.state.image);
+    if (this.state.image != null) {
+      formData.append("image", this.state.image);
+    }
     formData.append("name", this.state.name);
     formData.append("email", this.state.email.toLowerCase());
     formData.append("password", this.state.password);
