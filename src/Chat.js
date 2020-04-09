@@ -76,21 +76,8 @@ class Chat extends Component {
     return (
       <div id="wrap">
         <Grid container justify="center" alignItems="center">
-          <Box clone order={{ xs: 2, sm: 1 }}>
-            <Grid item xs={12} sm={3} md={3}>
-              <div style={{ height: `${this.state.nHeight}px` }} id="nav">
-                <Sidebar
-                  redirect={this.redirect}
-                  changeChannel={this.changeChannel}
-                  channels={this.state.channels}
-                  wallOpen={this.wallOpen}
-                  wallClose={this.wallClose}
-                />
-              </div>
-            </Grid>
-          </Box>
           <Box clone order={{ xs: 1, sm: 2 }}>
-            <Grid item xs={12} sm={9} md={9}>
+            <Grid item xs={12} sm={12} md={12}>
               <div
                 style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
                 id="test"
@@ -106,3 +93,17 @@ class Chat extends Component {
 }
 
 export default Chat;
+
+// <Box clone order={{ xs: 2, sm: 1 }}>
+//   <Grid item xs={12} sm={3} md={3}>
+//     <div style={{ height: `${this.state.nHeight}px` }} id="nav">
+//       <Sidebar
+//         redirect={this.redirect}
+//         changeChannel={this.changeChannel}
+//         channels={this.state.channels}
+//         wallOpen={this.wallOpen}
+//         wallClose={this.wallClose}
+//       />
+//     </div>
+//   </Grid>
+// </Box>
