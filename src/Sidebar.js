@@ -130,12 +130,10 @@ class Sidebar extends Component {
                   this.state.currentUser.name.slice(1)}
               </span>
               <p id="userEmail">{this.state.currentUser.email}</p>
+              <button onClick={this.openWall} id="meetup">
+                <span>HITMEUP</span>
+              </button>
             </div>
-          </Grid>
-          <Grid item sm={12} md={12}>
-            <button onClick={this.openWall} id="meetup">
-              <span>HITMEUP</span>
-            </button>
           </Grid>
           <Grid item xs={6} sm={12} md={12}>
             <ul className="list-unstyled">

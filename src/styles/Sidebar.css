@@ -161,14 +161,14 @@
   #userEmail {
     display: none;
   }
-  #meetup {
+  /* #meetup {
     position: absolute;
     top: -50px;
     left: 68vw;
     z-index: 100;
     width: 28%;
     height: 40px;
-  }
+  } */
   .userInfo p {
     display: none;
   }
