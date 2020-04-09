@@ -57,8 +57,8 @@ class Chat extends Component {
       });
     } else {
       this.setState({
-        wHeight: window.innerHeight - 100,
-        nHeight: 100
+        wHeight: window.innerHeight,
+        nHeight: window.innerHeight
       });
     }
   };
@@ -68,8 +68,8 @@ class Chat extends Component {
     return (
       <div id="wrap">
         <Grid container justify="center" alignItems="center">
-          <Box clone order={{ xs: 2, sm: 1 }}>
-            <Grid item xs={12} sm={3} md={3}>
+          <Box clone order={{ xs: 1, sm: 1 }}>
+            <Grid item xs={3} sm={3} md={3}>
               <div style={{ height: `${this.state.nHeight}px` }} id="nav">
                 <Sidebar
                   redirect={this.redirect}
@@ -79,8 +79,8 @@ class Chat extends Component {
               </div>
             </Grid>
           </Box>
-          <Box clone order={{ xs: 1, sm: 2 }}>
-            <Grid item xs={12} sm={9} md={9}>
+          <Box clone order={{ xs: 2, sm: 2 }}>
+            <Grid item xs={9} sm={9} md={9}>
               <div
                 style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
                 id="test"
