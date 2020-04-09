@@ -31,6 +31,7 @@ class Messages extends Component {
             this.setState({ messages: res.data });
           })
           .catch(err => console.log(err));
+        this.forceUpdate();
       }
     );
   }
@@ -55,6 +56,7 @@ class Messages extends Component {
             this.setState({ messages: res.data });
           })
           .catch(err => console.log(err));
+        this.forceUpdate();
       }
     );
   }
@@ -80,6 +82,7 @@ class Messages extends Component {
             this.setState({ messages: res.data });
           })
           .catch(err => console.log(err));
+        this.forceUpdate();
       }
     );
   }
