@@ -161,14 +161,12 @@
   #userEmail {
     display: none;
   }
-  .list-unstyled {
-  }
   #meetup {
     position: absolute;
     top: -50px;
-    left: 74vw;
+    left: 68vw;
     z-index: 100;
-    width: 20%;
+    width: 28%;
     height: 40px;
   }
   .userInfo p {
@@ -176,7 +174,7 @@
   }
 
   .list-unstyled {
-    text-align: left;
+    text-align: center;
     font-size: 0.8rem;
   }
 }

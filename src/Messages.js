@@ -70,7 +70,11 @@ class Messages extends Component {
                   <span className="location">{message.location}</span>
                   <span className="summaryText"> on </span>
                   <span className="eventDate">
-                    <Moment date={message.date} format="dddd, MMM Do YYYY" />
+                    <Moment date={message.date} format="ll" />{" "}
+                  </span>
+                  <span> at </span>
+                  <span className="eventTime">
+                    <Moment date={message.date} format="LT" />
                   </span>
                 </div>
                 <div className="body">{message.text}</div>
