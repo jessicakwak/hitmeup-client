@@ -64,9 +64,7 @@ class Messages extends Component {
 
   // Lifecycle
   componentDidUpdate(prevProps) {
-    const { selected } = this.props;
-    // if selected prop changed, refetch data
-    if (prevProps.selected !== selected) {
+    if (prevProps.selected !== this.props.selected) {
       this.fetchMessages();
     }
   }
@@ -112,7 +110,6 @@ class Messages extends Component {
                   
                 </div>
                 {this.renderTrash(message.user.email,this.state.loggedInUser, message._id)}
-                {/* <i class="fas fa-times" id={message._id} onClick={this.deleteMessages}></i> */}
                 <div className="body">{message.text}</div>
                 <span className="date">
                   <Moment

@@ -83,7 +83,8 @@
   color:grey
 }
 .fa-times:hover{
-  color:tomato
+  color:tomato;
+  cursor:pointer
 }
 
 
