@@ -5,10 +5,25 @@ import axios from "axios";
 import Moment from "react-moment";
 
 class Messages extends Component {
-  // Data
-  state = {
-    messages: []
-  };
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      messages: [],
+      willRerender:this.props.willRerender,
+      fetchMessages:this.fetchMessages.bind(this),
+      shouldRerender:this.props.shouldRerender.bind(this)
+    };
+  }
+  
+  static getDerivedStateFromProps(props,state){
+    if(props.willRerender !== state.willRerender){
+      state.fetchMessages()
+      state.shouldRerender(false);
+      return null
+    }
+    return null
+  }
 
   fetchMessages = () => {
     let config = {
@@ -41,10 +56,11 @@ class Messages extends Component {
 
   // Render
   render() {
+    const {messages}=this.state
     return (
       <div id="messages">
         <div id="content">
-          {this.state.messages.map(message => {
+          {messages.map(message => {
             return (
               <div className="message" key={message._id}>
                 <div

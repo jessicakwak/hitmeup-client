@@ -9,31 +9,18 @@ import Box from "@material-ui/core/Box";
 //current working v
 
 class Chat extends Component {
-  state = {
-    channels: [],
-    selected: "",
-    wHeight: 0,
-    nHeight: 0
-  };
-  UNSAFE_componentWillMount() {
-    //Header includes a token
-    let config = {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      channels: [],
+      selected: "",
+      wHeight: 0,
+      nHeight: 0,
+      willRerender:false
     };
-    //make a get request via axios to get channel list
-    axios
-      .get(`${process.env.REACT_APP_API}/channels`, config)
-      .then(res => {
-        //set active state to true for the first channel
-        res.data[0].active = true;
-        //then save to the state variables
-        this.setState({ channels: res.data, selected: res.data[0]._id });
-        localStorage.setItem("channel", res.data[0]._id);
-      })
-      .catch(err => console.log(err));
-    this.updateDimensions();
-    //this is where you need to set selected channel because channel ID is empty
   }
+  
   componentDidMount() {
     let config = {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
@@ -60,7 +47,7 @@ class Chat extends Component {
   changeChannel = id => {
     let channelCopy = this.state.channels;
     channelCopy.map(e => (e.active = false));
-    channelCopy.find(e => e._id == id).active = true;
+    channelCopy.find(e => e._id === id).active = true;
     this.setState({ channels: channelCopy, selected: id });
   };
 
@@ -78,6 +65,10 @@ class Chat extends Component {
     }
   };
 
+  shouldRerender = x=>{
+    this.setState({willRerender:x})
+    }
+
   // Render
   render() {
     return (
@@ -90,6 +81,7 @@ class Chat extends Component {
                   redirect={this.redirect}
                   changeChannel={this.changeChannel}
                   channels={this.state.channels}
+                  shouldRerender={this.shouldRerender}
                 />
               </div>
             </Grid>
@@ -100,7 +92,9 @@ class Chat extends Component {
                 style={{ height: `${this.state.wHeight}px`, overflow: "auto" }}
                 id="test"
               >
-                <Messages selected={this.state.selected} />
+                <Messages selected={this.state.selected} 
+                willRerender={this.state.willRerender}
+                shouldRerender={this.shouldRerender}/>
               </div>
             </Grid>
           </Box>
@@ -112,16 +106,3 @@ class Chat extends Component {
 
 export default Chat;
 
-// <Box clone order={{ xs: 2, sm: 1 }}>
-//   <Grid item xs={12} sm={3} md={3}>
-//     <div style={{ height: `${this.state.nHeight}px` }} id="nav">
-//       <Sidebar
-//         redirect={this.redirect}
-//         changeChannel={this.changeChannel}
-//         channels={this.state.channels}
-//         wallOpen={this.wallOpen}
-//         wallClose={this.wallClose}
-//       />
-//     </div>
-//   </Grid>
-// </Box>

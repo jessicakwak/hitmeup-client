@@ -2,20 +2,21 @@ import React from "react";
 import axios from "axios";
 
 class Login extends React.Component {
-  // Data
-  state = {
-    email: "",
-    password: "",
-    image: "",
-    intro: "",
-    error: ""
-  };
-  componentWillMount() {}
-  // Methods
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      email: "",
+      password: "",
+      image: "",
+      intro: "",
+      error: ""
+    };
+  }
 
   login = e => {
     e.preventDefault();
-    if (this.state.email == "" || this.state.password == "") {
+    if (this.state.email === "" || this.state.password === "") {
       this.setState({ error: "All fields are required" });
     } else {
       axios
@@ -24,9 +25,9 @@ class Login extends React.Component {
           password: this.state.password
         })
         .then(response => {
-          if (response.data == "nomatch") {
+          if (response.data === "nomatch") {
             this.setState({ error: "Email and password doesn't match" });
-          } else if (response.data == "noemail") {
+          } else if (response.data === "noemail") {
             this.setState({ error: "Email does not exist" });
           } else {
             console.log(response);
@@ -43,18 +44,17 @@ class Login extends React.Component {
   };
   setInput = e => {
     e.preventDefault();
-    // if (e.target.className == "email") {
-    //   e.target.value = e.target.value.toLowerCase();
-    // }
     this.setState({ [e.target.className]: e.target.value });
   };
   // Render
   render() {
+    const {error} = this.state.error
     return (
       <div className="loginContainer">
         <img
           src="https://res.cloudinary.com/jesskcloud/image/upload/v1586161160/hitmeup_logo_crlriz.png"
           className="logo"
+          alt="logo"
         />
         <h4>What are you up for tonight?</h4>
         <form className="card" onSubmit={this.login}>
@@ -77,7 +77,7 @@ class Login extends React.Component {
           <div className="link">
             <a href="/signup">New here? Create an account</a>
           </div>
-          <div className="error">{this.state.error}</div>
+          <div className="error">{error}</div>
         </form>
       </div>
     );

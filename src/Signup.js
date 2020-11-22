@@ -2,22 +2,26 @@ import React from "react";
 import axios from "axios";
 
 class Signup extends React.Component {
-  // Data
-  state = {
-    name: "",
-    email: "",
-    password: "",
-    intro: "",
-    image: null,
-    error: ""
-  };
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      name: "",
+      email: "",
+      password: "",
+      intro: "",
+      image: null,
+      error: ""
+    };
+  }
+
   // Methods
   signup = e => {
     e.preventDefault();
     if (
-      this.state.name == "" ||
-      this.state.email == "" ||
-      this.state.password == ""
+      this.state.name === "" ||
+      this.state.email === "" ||
+      this.state.password === ""
     ) {
       this.setState({ error: "Name, email and password are required!" });
     } else if (
@@ -41,7 +45,7 @@ class Signup extends React.Component {
     axios
       .post(`${process.env.REACT_APP_API}/users/signup`, formData)
       .then(data => {
-        if (data.data == "User already exists") {
+        if (data.data === "User already exists") {
           this.setState({ error: data.data });
         } else {
           //store to the local storage and redirect users
@@ -69,7 +73,7 @@ class Signup extends React.Component {
     if (e.target.files[0].size > 2000000) {
       console.log(e.target.files[0]);
       this.setState({ error: "Profile picture has to be under 2MB" });
-    } else if (fileType != "jpg" && fileType != "peg" && fileType != "png") {
+    } else if (fileType !== "jpg" && fileType !== "peg" && fileType !== "png") {
       console.log(e.target.files[0]);
       this.setState({
         error: "Profile picture has to be .jpg, .jpeg or .png file"
@@ -81,11 +85,13 @@ class Signup extends React.Component {
   };
   // Render
   render() {
+    const {error} = this.state
     return (
       <div className="loginContainer">
         <img
           src="https://res.cloudinary.com/jesskcloud/image/upload/v1586161160/hitmeup_logo_crlriz.png"
           className="logo"
+          alt="logo"
         />
         <h4>What are you up for tonight?</h4>
         <form className="card" onSubmit={this.signup}>
@@ -124,7 +130,7 @@ class Signup extends React.Component {
           <div className="link">
             <a href="/login">Already have an account? Login</a>
           </div>
-          <div className="error">{this.state.error}</div>
+          <div className="error">{error}</div>
         </form>
       </div>
     );

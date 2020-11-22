@@ -5,24 +5,28 @@ import MaterialUIPickers from "./MaterialUIPickers";
 import Grid from "@material-ui/core/Grid";
 
 class Sidebar extends Component {
-  // Data
-  state = {
-    channels: [],
-    currentUser: {
-      name: "",
-      email: "",
-      image: "",
-      intro: ""
-    },
-    wallOpen: false,
-    newMessage: {
-      text: "",
-      location: "",
-      eventDate: Date.now()
-    }
-  };
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      channels: [],
+      currentUser: {
+        name: "",
+        email: "",
+        image: "",
+        intro: ""
+      },
+      wallOpen: false,
+      newMessage: {
+        text: "",
+        location: "",
+        eventDate: Date.now()
+      }
+    };
+  }
+  
   // Lifecycle
-  componentWillMount() {
+  componentDidMount() {
     //when mounted, get name and email from the local storage
     let user = {
       name: localStorage.getItem("name"),
@@ -32,9 +36,14 @@ class Sidebar extends Component {
     };
     this.setState({ currentUser: user });
   }
-  componentWillReceiveProps(newProp) {
-    //when sidebar receives a new prop (from [] to something) set state variables
-    this.setState({ channels: newProp.channels });
+
+  static getDerivedStateFromProps(props, state){
+    if(props.channels!==state.channels){
+      return {
+        channels:props.channels
+      }
+    }
+    return null;
   }
 
   changeText = e => {
@@ -75,9 +84,10 @@ class Sidebar extends Component {
     axios
       .post(`${process.env.REACT_APP_API}/messages`, dataToSend, config)
       .then(response => {
-        console.log(response);
+        // console.log(response);
         if (response) {
           this.closeWall();
+          this.props.shouldRerender(true);
         }
       })
       .catch(err => {
@@ -109,6 +119,7 @@ class Sidebar extends Component {
   };
   // Render
   render() {
+    const {currentUser, channels} =this.state
     return (
       <div id="sidebar">
         <Grid container>
@@ -116,20 +127,21 @@ class Sidebar extends Component {
             <img
               src="https://res.cloudinary.com/jesskcloud/image/upload/v1586161244/hitmeup_logo_trans_axrm3h.png"
               className="Sidebarlogo"
+              alt="Sidebarlogo"
             />
             <div className="userInfo">
               <div
                 className="userImage"
                 style={{
-                  backgroundImage: `url(${this.state.currentUser.image})`
+                  backgroundImage: `url(${currentUser.image})`
                 }}
               ></div>
               <p>Hello!</p>
               <span className="userName">
-                {this.state.currentUser.name.charAt(0).toUpperCase() +
-                  this.state.currentUser.name.slice(1)}
+                {currentUser.name.charAt(0).toUpperCase() +
+                  currentUser.name.slice(1)}
               </span>
-              <p id="userEmail">{this.state.currentUser.email}</p>
+              <p id="userEmail">{currentUser.email}</p>
               <button onClick={this.openWall} id="meetup">
                 <span>HITMEUP</span>
               </button>
@@ -137,7 +149,7 @@ class Sidebar extends Component {
           </Grid>
           <Grid item xs={5} sm={12} md={12}>
             <ul className="list-unstyled">
-              {this.state.channels.map((channel, i) => {
+              {channels.map((channel, i) => {
                 return (
                   <li
                     key={channel._id}
