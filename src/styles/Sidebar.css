@@ -58,6 +58,9 @@
   color: #a391bc;
   background: #1f1c3a;
 }
+#logoutBtn:hover {
+  color:white
+}
 
 #meetup {
   background: #d8b9c3;
