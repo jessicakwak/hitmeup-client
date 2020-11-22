@@ -12,7 +12,8 @@ class Messages extends Component {
       messages: [],
       willRerender:this.props.willRerender,
       fetchMessages:this.fetchMessages.bind(this),
-      shouldRerender:this.props.shouldRerender.bind(this)
+      shouldRerender:this.props.shouldRerender.bind(this),
+      loggedInUser:localStorage.getItem("email")
     };
   }
   
@@ -41,6 +42,22 @@ class Messages extends Component {
       .catch(err => console.log(err));
   };
 
+  deleteMessages = e =>{
+    let config = {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
+    };
+    axios
+      .delete(
+        `${process.env.REACT_APP_API}/messages/${e.target.id}`,
+        config
+      )
+      .then(res => {
+        this.fetchMessages()
+      })
+      .catch(err => console.log(err));
+  }
+
+
   componentDidMount() {
     this.fetchMessages();
   }
@@ -54,9 +71,17 @@ class Messages extends Component {
     }
   }
 
+  renderTrash = (x,y,_id)=>{
+
+    if(x==y){
+      return <i class="fas fa-times" id={_id} onClick={this.deleteMessages}></i>
+    }
+  }
+
   // Render
   render() {
     const {messages}=this.state
+    const myMessageDelete = <></>
     return (
       <div id="messages">
         <div id="content">
@@ -84,7 +109,10 @@ class Messages extends Component {
                   <span className="eventTime">
                     <Moment date={message.date} format="LT" />
                   </span>
+                  
                 </div>
+                {this.renderTrash(message.user.email,this.state.loggedInUser, message._id)}
+                {/* <i class="fas fa-times" id={message._id} onClick={this.deleteMessages}></i> */}
                 <div className="body">{message.text}</div>
                 <span className="date">
                   <Moment

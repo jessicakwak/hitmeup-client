@@ -49,6 +49,7 @@
 
 .usrInfo {
   margin-left: 13%;
+  width:75%
 }
 
 .user,
@@ -74,6 +75,17 @@
 .summaryText {
   color: grey;
 }
+
+.fa-times{
+  position:absolute;
+  right:3%;
+  top:7%;
+  color:grey
+}
+.fa-times:hover{
+  color:tomato
+}
+
 
 @media (max-width: 780px) {
   .usrInfo {

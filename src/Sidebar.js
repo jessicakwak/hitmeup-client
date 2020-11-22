@@ -77,7 +77,7 @@ class Sidebar extends Component {
       location: this.state.newMessage.location,
       date: this.state.newMessage.eventDate
     };
-    console.log(dataToSend);
+    // console.log(dataToSend);
     let config = {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     };
@@ -94,7 +94,6 @@ class Sidebar extends Component {
         console.log(err);
       });
 
-    // document.getElementById("wall").classList.remove("open");
   };
 
   // Methods
